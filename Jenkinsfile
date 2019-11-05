@@ -1,8 +1,9 @@
 pipeline {
 
   environment {
-    registry = "192.168.1.81:5000/justme/myweb"
-    dockerImage = ""
+    registry = "durgaprasad/pipelineproject"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
   }
 
   agent any
@@ -26,7 +27,7 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          docker.withRegistry( "" ) {
+          docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
